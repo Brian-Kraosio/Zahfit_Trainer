@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "929278879657",
+    "firebase_url": "https://zahfit-s-mobile-app.firebaseio.com",
+    "project_id": "zahfit-s-mobile-app",
+    "storage_bucket": "zahfit-s-mobile-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929278879657:android:dbc0d27ff56f16f31b86b8",
+        "android_client_info": {
+          "package_name": "com.example.zahfit_trainer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929278879657-p7h3et24590ljt0q1juql3joq3c21hgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApO23XyTmPv3NmRjPkvShWu6lN_1cPJQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929278879657-p7h3et24590ljt0q1juql3joq3c21hgj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:929278879657:android:4dac873f020809cb1b86b8",
+        "android_client_info": {
+          "package_name": "com.example.zahfitclient"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "929278879657-p7h3et24590ljt0q1juql3joq3c21hgj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyApO23XyTmPv3NmRjPkvShWu6lN_1cPJQM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "929278879657-p7h3et24590ljt0q1juql3joq3c21hgj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

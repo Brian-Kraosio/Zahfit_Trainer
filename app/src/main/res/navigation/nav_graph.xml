@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.zahfit_trainer.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_trainerHomepageFragment"
+            app:destination="@id/trainerHomepageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/trainerHomepageFragment"
+        android:name="com.example.zahfit_trainer.trainerHomepage.TrainerHomepageFragment"
+        android:label="fragment_trainer_homepage"
+        tools:layout="@layout/fragment_trainer_homepage" >
+        <action
+            android:id="@+id/action_trainerHomepageFragment_to_editProfileFragment3"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.zahfit_trainer.profile.EditProfileFragment"
+        android:label="EditProfileFragment" >
+        <action
+            android:id="@+id/action_editProfileFragment3_to_trainerHomepageFragment"
+            app:destination="@id/trainerHomepageFragment" />
+    </fragment>
+</navigation>
