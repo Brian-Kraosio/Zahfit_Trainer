@@ -1,5 +1,6 @@
 package com.example.zahfit_trainer.trainingProgram;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +22,7 @@ public class TrainingProgramAdapter extends RecyclerView.Adapter<TrainingProgram
     public TrainingProgramAdapter() {
     }
 
-    public void setList(List<Plan> list){
+    public void setList(List<Plan> list) {
         this.list = list;
         notifyDataSetChanged();
     }
@@ -51,12 +52,14 @@ public class TrainingProgramAdapter extends RecyclerView.Adapter<TrainingProgram
 
     public class TrainingViewHolder extends RecyclerView.ViewHolder {
         private TrainingProgramItemBinding binding;
+
         public TrainingViewHolder(TrainingProgramItemBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
 
-        public void bind(Plan plan){
+        public void bind(Plan plan) {
+            Log.i("URI", "img uri: " + plan.getUri());
             Glide.with(binding.getRoot().getContext()).load(plan.getUri()).into(binding.imageView2);
             binding.setPlan(plan);
             binding.executePendingBindings();

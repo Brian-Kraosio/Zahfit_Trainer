@@ -71,18 +71,12 @@ public class Plan implements Parcelable {
         return plan_name;
     }
 
-    public String getLevel_name
-            () {
-        return level_name
-                ;
+    public String getLevel_name() {
+        return level_name;
     }
 
-    public void setLevel_name
-            (String level_name
-            ) {
-        this.level_name
-                = level_name
-        ;
+    public void setLevel_name(String level_name) {
+        this.level_name = level_name;
     }
 
     public String getType_name() {
