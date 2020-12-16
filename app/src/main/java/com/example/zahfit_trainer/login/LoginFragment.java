@@ -1,5 +1,6 @@
 package com.example.zahfit_trainer.login;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,12 +16,14 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.example.zahfit_trainer.MainActivity;
 import com.example.zahfit_trainer.R;
 import com.example.zahfit_trainer.databinding.FragmentLoginBinding;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class LoginFragment extends Fragment {
     FragmentLoginBinding binding;
@@ -65,5 +68,18 @@ public class LoginFragment extends Fragment {
             }
         });
         return binding.getRoot();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        FirebaseUser user = firebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            NavDirections action = LoginFragmentDirections.actionLoginFragmentToTrainerHomepageFragment();
+            Navigation.findNavController(requireView()).navigate(action);
+        } else {
+            // User is signed out
+            Log.d("AUTH", "onAuthStateChanged:signed_out");
+        }
     }
 }

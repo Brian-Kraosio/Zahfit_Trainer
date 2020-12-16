@@ -11,6 +11,9 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.style.ImageSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +67,21 @@ public class ProfileFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 personalTrainer = snapshot.getValue(PersonalTrainer.class);
                 binding.trainerName.setText(personalTrainer.getPersonal_trainer_name());
+
+                SpannableStringBuilder ssb = new SpannableStringBuilder();
+
+                ssb.append(" ");
+
+                ssb.setSpan(
+                        new ImageSpan(getContext(), R.drawable.ic_baseline_star_rate_24),
+                        ssb.length() - 1,
+                        ssb.length(),
+                        0);
+
+                ssb.append(personalTrainer.getPersonal_trainer_ratings());
+
+                binding.starRatings.setText(ssb);
+
                 mStorageReference.child(getTrainerId + ".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
@@ -93,6 +111,8 @@ public class ProfileFragment extends Fragment {
                 Navigation.findNavController(requireView()).navigate(action);
             }
         });
+
+
         return view;
     }
 
