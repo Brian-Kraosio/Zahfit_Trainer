@@ -1,5 +1,6 @@
 package com.example.zahfit_trainer.profile;
 
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ import com.bumptech.glide.Glide;
 import com.example.zahfit_trainer.R;
 import com.example.zahfit_trainer.databinding.FragmentProfileBinding;
 import com.example.zahfit_trainer.model.PersonalTrainer;
-import com.example.zahfit_trainer.trainerHomepage.TrainerHomepageFragmentDirections;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,6 +34,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
+
+import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
     FragmentProfileBinding binding;
@@ -43,6 +46,7 @@ public class ProfileFragment extends Fragment {
     PersonalTrainer personalTrainer;
     FirebaseStorage storage;
     StorageReference storageReference;
+    private final int PICK_IMAGE_REQUEST = 1;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -85,7 +89,7 @@ public class ProfileFragment extends Fragment {
                 mStorageReference.child(getTrainerId + ".png").getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                     @Override
                     public void onSuccess(Uri uri) {
-                        Glide.with(view.getContext()).load(uri).into(binding.imageView);
+                        Glide.with(view.getContext()).load(uri).into(binding.profilePicture);
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
@@ -93,7 +97,7 @@ public class ProfileFragment extends Fragment {
                         String uri = "@drawable/ic_baseline_person_24";
                         int imageResource = getResources().getIdentifier(uri, null, getActivity().getPackageName());
                         Drawable res = getActivity().getDrawable(imageResource);
-                        binding.imageView.setImageDrawable(res);
+                        binding.profilePicture.setImageDrawable(res);
                     }
                 });
             }
@@ -104,14 +108,6 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        binding.btnEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NavDirections action = TrainerHomepageFragmentDirections.actionTrainerHomepageFragmentToEditProfileFragment3();
-                Navigation.findNavController(requireView()).navigate(action);
-            }
-        });
-
         binding.btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,7 +115,33 @@ public class ProfileFragment extends Fragment {
                 Navigation.findNavController(view).navigate(R.id.loginFragment);
             }
         });
+
+        binding.profilePicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent, PICK_IMAGE_REQUEST);
+            }
+        });
         return view;
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode==PICK_IMAGE_REQUEST&&resultCode==RESULT_OK){
+            storageReference = FirebaseStorage.getInstance().getReference();
+            mDatabaseReference = FirebaseDatabase.getInstance().getReference();
+            String img = user.getUid() + ".png";
+            uri = data.getData();
+            StorageReference filepath=storageReference.child(img);
+            filepath.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    mDatabaseReference.child("personal_trainer").child(user.getUid()).setValue(personalTrainer);
+                }
+            });
+        }
+    }
 }

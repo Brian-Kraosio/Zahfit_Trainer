@@ -10,11 +10,6 @@ public class PersonalTrainer implements Parcelable  {
     public PersonalTrainer() {
     }
 
-    public PersonalTrainer(String personal_trainer_name, String personal_trainer_ratings) {
-        this.personal_trainer_name = personal_trainer_name;
-        this.personal_trainer_ratings = personal_trainer_ratings;
-    }
-
     public PersonalTrainer(String personal_trainer_name) {
         this.personal_trainer_name = personal_trainer_name;
     }

@@ -18,17 +18,5 @@
         android:id="@+id/trainerHomepageFragment"
         android:name="com.example.zahfit_trainer.trainerHomepage.TrainerHomepageFragment"
         android:label="fragment_trainer_homepage"
-        tools:layout="@layout/fragment_trainer_homepage" >
-        <action
-            android:id="@+id/action_trainerHomepageFragment_to_editProfileFragment3"
-            app:destination="@id/editProfileFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/editProfileFragment"
-        android:name="com.example.zahfit_trainer.profile.EditProfileFragment"
-        android:label="EditProfileFragment" >
-        <action
-            android:id="@+id/action_editProfileFragment3_to_trainerHomepageFragment"
-            app:destination="@id/trainerHomepageFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_trainer_homepage" />
 </navigation>
