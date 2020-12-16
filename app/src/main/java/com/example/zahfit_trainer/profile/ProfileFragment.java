@@ -112,7 +112,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-
+        binding.btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseAuth.getInstance().signOut();
+                Navigation.findNavController(view).navigate(R.id.loginFragment);
+            }
+        });
         return view;
     }
 

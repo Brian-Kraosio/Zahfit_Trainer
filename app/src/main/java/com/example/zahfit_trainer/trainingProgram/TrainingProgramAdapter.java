@@ -57,7 +57,6 @@ public class TrainingProgramAdapter extends RecyclerView.Adapter<TrainingProgram
         }
 
         public void bind(Plan plan){
-            Glide.with(binding.getRoot().getContext()).load(plan.getUri()).into(binding.imageView2);
             binding.setPlan(plan);
             binding.executePendingBindings();
         }
