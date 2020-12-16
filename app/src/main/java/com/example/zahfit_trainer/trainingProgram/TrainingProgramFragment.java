@@ -55,15 +55,14 @@ public class TrainingProgramFragment extends Fragment {
         viewModel = new ViewModelProvider(this, trainingProgramViewModelFactory).get(TrainingProgramViewModel.class);
         binding.setViewmodel(viewModel);
         binding.setLifecycleOwner(this);
-        setupRvTrainingProgram();
         return binding.getRoot();
     }
 
-//    @Override
-//    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-//        super.onActivityCreated(savedInstanceState);
-//
-//    }
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        setupRvTrainingProgram();
+    }
 
     private void setupRvTrainingProgram(){
         RecyclerView recyclerView = binding.trainingProgramRv;
@@ -83,6 +82,7 @@ public class TrainingProgramFragment extends Fragment {
                 TrainingProgramAdapter adapter = new TrainingProgramAdapter();
                 recyclerView.setAdapter(adapter);
                 adapter.setList(planList);
+                adapter.notifyDataSetChanged();
             }
 
             @Override

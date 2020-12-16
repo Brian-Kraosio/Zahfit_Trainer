@@ -28,16 +28,17 @@ import com.google.firebase.auth.FirebaseUser;
 public class LoginFragment extends Fragment {
     FragmentLoginBinding binding;
     private FirebaseAuth firebaseAuth;
+    FirebaseUser user;
 
     public LoginFragment() {
         // Required empty public constructor
     }
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.firebaseAuth = FirebaseAuth.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
     }
 
     @Override
@@ -45,7 +46,6 @@ public class LoginFragment extends Fragment {
                              Bundle savedInstanceState) {
         getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_login, container, false);
-
         binding.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
