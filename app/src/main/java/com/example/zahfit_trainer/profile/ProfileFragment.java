@@ -23,6 +23,8 @@ import com.bumptech.glide.Glide;
 import com.example.zahfit_trainer.R;
 import com.example.zahfit_trainer.databinding.FragmentProfileBinding;
 import com.example.zahfit_trainer.model.PersonalTrainer;
+import com.example.zahfit_trainer.model.Plan;
+import com.example.zahfit_trainer.trainingProgram.TrainingProgramAdapter;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,6 +38,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static android.app.Activity.RESULT_OK;
 
 public class ProfileFragment extends Fragment {
@@ -46,6 +51,7 @@ public class ProfileFragment extends Fragment {
     PersonalTrainer personalTrainer;
     FirebaseStorage storage;
     StorageReference storageReference;
+    private List<Plan> planList;
     private final int PICK_IMAGE_REQUEST = 1;
 
     public ProfileFragment() {
@@ -100,6 +106,19 @@ public class ProfileFragment extends Fragment {
                         binding.profilePicture.setImageDrawable(res);
                     }
                 });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        mDatabaseReference.child("exercise_plan").orderByChild("personal_trainer_id").equalTo(getTrainerId).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int trainingCount = (int) snapshot.getChildrenCount();
+                binding.totalExercise.setText(Integer.toString(trainingCount));
             }
 
             @Override
